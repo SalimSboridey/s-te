@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Обратный отсчёт: Полгода до большой цели</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <svg class="connections" aria-hidden="true"></svg>
+
+      <section class="core-card" id="coreCard">
+        <h1>30.06.2026</h1>
+        <p>Бюджет: 200 000 ₽</p>
+        <div class="time-progress" id="timeProgress" aria-label="Прогресс времени"></div>
+        <div class="budget-chart-wrap">
+          <div class="budget-chart" id="budgetChart"></div>
+          <small>Распределение бюджета</small>
+        </div>
+      </section>
+
+      <section class="goals-layer" id="goalsLayer"></section>
+    </main>
+
+    <aside class="details-panel" id="detailsPanel" aria-live="polite">
+      <button class="close-panel" id="closePanel">✕</button>
+      <h2 id="panelTitle"></h2>
+      <ul id="tasksList"></ul>
+    </aside>
+
+    <div class="modal" id="moodboardModal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="close-modal" id="closeModal">✕</button>
+        <h3 id="modalTitle">Мудборд</h3>
+        <div class="mood-grid">
+          <div class="mood-item">До</div>
+          <div class="mood-item">Референс</div>
+          <div class="mood-item">Процесс</div>
+          <div class="mood-item">Итог</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
