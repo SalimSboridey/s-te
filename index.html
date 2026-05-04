@@ -3,50 +3,559 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Обратный отсчёт: Полгода до большой цели</title>
+    <meta name="description" content="Купить квартиру у моря в Турции, Ялова недвижимость, ВНЖ за недвижимость 2026. Квартиры в шаговой доступности от Мраморного моря." />
+    <meta name="keywords" content="Купить квартиру у моря в Турции, Ялова недвижимость, ВНЖ за недвижимость 2026, квартира в Ялове, Турция недвижимость" />
+    <title>Ялова — Ваш дом у теплого Мраморного моря | Недвижимость в Турции</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app">
-      <svg class="connections" aria-hidden="true"></svg>
+    <!-- Плавающая кнопка связи -->
+    <a href="https://wa.me/905000000000" class="floating-whatsapp" aria-label="Связаться в WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+    </a>
 
-      <section class="core-card" id="coreCard">
-        <h1>30.06.2026</h1>
-        <p>Бюджет: 200 000 ₽</p>
-        <div class="time-progress" id="timeProgress" aria-label="Прогресс времени"></div>
-        <div class="budget-chart-wrap">
-          <div class="budget-chart" id="budgetChart"></div>
-          <small>Распределение бюджета</small>
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">
+          <span class="logo-icon">🏠</span>
+          <span class="logo-text">Yalova Homes</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#advantage">Преимущества</a></li>
+          <li><a href="#properties">Квартиры</a></li>
+          <li><a href="#residence">ВНЖ</a></li>
+          <li><a href="#explore">Регион</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+        <button class="mobile-menu-btn" aria-label="Меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Блок 1: Hero Section -->
+      <section class="hero" id="hero">
+        <div class="hero-bg">
+          <div class="hero-gradient"></div>
+          <div class="hero-particles" id="heroParticles"></div>
+        </div>
+        <div class="hero-content">
+          <h1 class="hero-title fade-in-up">
+            <span class="title-line">Ялова</span>
+            <span class="title-accent">Ваш дом у теплого</span>
+            <span class="title-line">Мраморного моря</span>
+          </h1>
+          <p class="hero-subtitle fade-in-up delay-1">
+            Бальнеологический курорт в часе езды от Стамбула. Горы, море, термальные источники и спокойная атмосфера для жизни вашей мечты.
+          </p>
+          <div class="hero-stats fade-in-up delay-2">
+            <div class="stat-item">
+              <span class="stat-value">50 км</span>
+              <span class="stat-label">до Стамбула</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">1 час</span>
+              <span class="stat-label">на пароме</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">от $85,000</span>
+              <span class="stat-label">цена квартиры</span>
+            </div>
+          </div>
+          <a href="#properties" class="btn btn-primary pulse-animation fade-in-up delay-3">
+            Подобрать квартиру
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        <div class="scroll-indicator">
+          <span>Листайте вниз</span>
+          <div class="scroll-arrow"></div>
         </div>
       </section>
 
-      <section class="goals-layer" id="goalsLayer"></section>
-    </main>
-
-    <aside class="details-panel" id="detailsPanel" aria-live="polite">
-      <button class="close-panel" id="closePanel">✕</button>
-      <h2 id="panelTitle"></h2>
-      <ul id="tasksList"></ul>
-    </aside>
-
-    <div class="modal" id="moodboardModal" aria-hidden="true">
-      <div class="modal-content">
-        <button class="close-modal" id="closeModal">✕</button>
-        <h3 id="modalTitle">Мудборд</h3>
-        <div class="mood-grid">
-          <div class="mood-item">До</div>
-          <div class="mood-item">Референс</div>
-          <div class="mood-item">Процесс</div>
-          <div class="mood-item">Итог</div>
+      <!-- Блок 2: Ключевое преимущество -->
+      <section class="advantage" id="advantage">
+        <div class="container">
+          <div class="advantage-grid">
+            <div class="advantage-content scroll-reveal">
+              <h2 class="section-title">
+                <span class="title-highlight">У самого моря</span>
+                с панорамными видами
+              </h2>
+              <p class="advantage-text">
+                Наши объекты недвижимости находятся в <strong>шаговой доступности от Мраморного моря</strong>. 
+                Панорамное остекление квартир позволяет наслаждаться живописными видами на воду и горы каждый день.
+              </p>
+              <div class="advantage-features">
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
+                    </svg>
+                  </div>
+                  <div class="feature-info">
+                    <span class="feature-value">200-500 м</span>
+                    <span class="feature-label">до береговой линии</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="12" cy="12" r="3"/>
+                      <path d="M12 1v6M12 17v6M4.2 4.2l4.2 4.2M15.6 15.6l4.2 4.2M1 12h6M17 12h6M4.2 19.8l4.2-4.2M15.6 8.4l4.2-4.2"/>
+                    </svg>
+                  </div>
+                  <div class="feature-info">
+                    <span class="feature-value">50 км</span>
+                    <span class="feature-label">до Стамбула</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M3 12h18M3 6h18M3 18h18"/>
+                    </svg>
+                  </div>
+                  <div class="feature-info">
+                    <span class="feature-value">Развитая</span>
+                    <span class="feature-label">инфраструктура</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="advantage-visual scroll-reveal delay-1">
+              <div class="coast-model">
+                <div class="sea-wave wave-1"></div>
+                <div class="sea-wave wave-2"></div>
+                <div class="sea-wave wave-3"></div>
+                <div class="mountain-silhouette"></div>
+                <div class="building-outline"></div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <!-- Блок 3: Предложения (Галерея) -->
+      <section class="properties" id="properties">
+        <div class="container">
+          <h2 class="section-title center scroll-reveal">
+            Доступные <span class="title-highlight">предложения</span>
+          </h2>
+          <p class="section-subtitle center scroll-reveal">
+            Современные квартиры с видом на море в лучших районах Яловы
+          </p>
+          
+          <div class="bento-grid">
+            <!-- Карточка 1 -->
+            <article class="property-card card-large scroll-reveal" data-tilt>
+              <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%232E86AB;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A23B72;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad1)' width='800' height='600'/%3E%3Ccircle cx='400' cy='300' r='150' fill='%23F18F01' opacity='0.3'/%3E%3C/svg%3E" 
+                     alt="Квартира с видом на море" 
+                     loading="lazy" />
+                <div class="card-badge">Новинка</div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">Апартаменты в Термале</h3>
+                <p class="card-location">📍 Термал, 300 м до моря</p>
+                <div class="card-specs">
+                  <div class="spec">
+                    <span class="spec-icon">🛏️</span>
+                    <span>2 спальни</span>
+                  </div>
+                  <div class="spec">
+                    <span class="spec-icon">📐</span>
+                    <span>85 м²</span>
+                  </div>
+                  <div class="spec">
+                    <span class="spec-icon">🚿</span>
+                    <span>2 санузла</span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span class="card-price">$125,000</span>
+                  <button class="btn btn-secondary btn-sm">Оставить заявку</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Карточка 2 -->
+            <article class="property-card card-medium scroll-reveal delay-1" data-tilt>
+              <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23C73E1D;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23E8B923;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad2)' width='600' height='400'/%3E%3Crect x='150' y='100' width='300' height='200' fill='%23ffffff' opacity='0.2'/%3E%3C/svg%3E" 
+                     alt="Современная квартира" 
+                     loading="lazy" />
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">Студия в центре</h3>
+                <p class="card-location">📍 Центр Яловы, 400 м до моря</p>
+                <div class="card-specs">
+                  <div class="spec">
+                    <span class="spec-icon">🛏️</span>
+                    <span>1 спальня</span>
+                  </div>
+                  <div class="spec">
+                    <span class="spec-icon">📐</span>
+                    <span>45 м²</span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span class="card-price">$85,000</span>
+                  <button class="btn btn-secondary btn-sm">Оставить заявку</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Карточка 3 -->
+            <article class="property-card card-medium scroll-reveal" data-tilt>
+              <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='grad3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23006D77;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2383C5BE' stop-opacity='1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad3)' width='600' height='400'/%3E%3Cpath d='M0 300 Q 150 250 300 300 T 600 300 L 600 400 L 0 400 Z' fill='%23FFDDD2' opacity='0.4'/%3E%3C/svg%3E" 
+                     alt="Квартира у парка" 
+                     loading="lazy" />
+                <div class="card-badge popular">Популярное</div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">Вилла в Чынарджыке</h3>
+                <p class="card-location">📍 Чынарджык, 150 м до пляжа</p>
+                <div class="card-specs">
+                  <div class="spec">
+                    <span class="spec-icon">🛏️</span>
+                    <span>3 спальни</span>
+                  </div>
+                  <div class="spec">
+                    <span class="spec-icon">📐</span>
+                    <span>150 м²</span>
+                  </div>
+                  <div class="spec">
+                    <span class="spec-icon">🌳</span>
+                    <span>Сад 200 м²</span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span class="card-price">$245,000</span>
+                  <button class="btn btn-secondary btn-sm">Оставить заявку</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Карточка 4 -->
+            <article class="property-card card-small scroll-reveal delay-1" data-tilt>
+              <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='grad4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23E29578;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23ED8354;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad4)' width='400' height='300'/%3E%3Ccircle cx='200' cy='150' r='80' fill='%23D4A373' opacity='0.5'/%3E%3C/svg%3E" 
+                     alt="Уютная квартира" 
+                     loading="lazy" />
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">Квартира в Алтынове</h3>
+                <p class="card-location">📍 Алтынова, вид на залив</p>
+                <div class="card-specs">
+                  <div class="spec">
+                    <span class="spec-icon">🛏️</span>
+                    <span>2 спальни</span>
+                  </div>
+                  <div class="spec">
+                    <span class="spec-icon">📐</span>
+                    <span>70 м²</span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span class="card-price">$110,000</span>
+                  <button class="btn btn-secondary btn-sm">Оставить заявку</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Карточка 5 -->
+            <article class="property-card card-small scroll-reveal" data-tilt>
+              <div class="card-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='grad5' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%236B9080;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A4C3B2' stop-opacity='1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad5)' width='400' height='300'/%3E%3Crect x='100' y='80' width='200' height='140' fill='%23ECE3CE' opacity='0.3'/%3E%3C/svg%3E" 
+                     alt="Квартира near парк" 
+                     loading="lazy" />
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">Дом near Сад Ататюрка</h3>
+                <p class="card-location">📍 Центр, near парк</p>
+                <div class="card-specs">
+                  <div class="spec">
+                    <span class="spec-icon">🛏️</span>
+                    <span>4 спальни</span>
+                  </div>
+                  <div class="spec">
+                    <span class="spec-icon">📐</span>
+                    <span>200 м²</span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span class="card-price">$295,000</span>
+                  <button class="btn btn-secondary btn-sm">Оставить заявку</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Блок 4: Оформление ВНЖ -->
+      <section class="residence" id="residence">
+        <div class="container">
+          <h2 class="section-title center scroll-reveal">
+            Получите <span class="title-highlight">ВНЖ Турции</span> при покупке
+          </h2>
+          <p class="section-subtitle center scroll-reveal">
+            Покупка недвижимости от $200,000 дает право на получение краткосрочного вида на жительство
+          </p>
+
+          <div class="timeline-wrapper scroll-reveal delay-1">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                  <h4>Покупка недвижимости</h4>
+                  <p>Выбираете объект, подписываете договор купли-продажи</p>
+                  <span class="timeline-time">1-3 дня</span>
+                </div>
+              </div>
+              <div class="timeline-line"></div>
+              
+              <div class="timeline-item">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                  <h4>Получение ТАПУ</h4>
+                  <p>Регистрация права собственности в кадастровом управлении</p>
+                  <span class="timeline-time">7-14 дней</span>
+                </div>
+              </div>
+              <div class="timeline-line"></div>
+              
+              <div class="timeline-item">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                  <h4>Подача на Икамет</h4>
+                  <p>Подача документов в миграционную службу</p>
+                  <span class="timeline-time">1-2 недели</span>
+                </div>
+              </div>
+              <div class="timeline-line"></div>
+              
+              <div class="timeline-item">
+                <div class="timeline-marker">✓</div>
+                <div class="timeline-content highlight">
+                  <h4>Получение ВНЖ</h4>
+                  <p>Вид на жительство на 2 года с правом продления</p>
+                  <span class="timeline-time">Итого: 1-2 месяца</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="documents-list scroll-reveal delay-2">
+            <h3 class="documents-title">Необходимые документы:</h3>
+            <ul class="documents-grid">
+              <li class="document-item">
+                <span class="doc-icon">📄</span>
+                <span>Загранпаспорт (оригинал + нотариально заверенный перевод)</span>
+              </li>
+              <li class="document-item">
+                <span class="doc-icon">📋</span>
+                <span>ТАПУ (свидетельство о собственности)</span>
+              </li>
+              <li class="document-item">
+                <span class="doc-icon">🏥</span>
+                <span>Медицинская страховка</span>
+              </li>
+              <li class="document-item">
+                <span class="doc-icon">📸</span>
+                <span>Биометрические фотографии (4 шт.)</span>
+              </li>
+              <li class="document-item">
+                <span class="doc-icon">💰</span>
+                <span>Подтверждение дохода (выписка из банка)</span>
+              </li>
+              <li class="document-item">
+                <span class="doc-icon">📝</span>
+                <span>Заявление на ВНЖ</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Блок 5: Исследуйте регион -->
+      <section class="explore" id="explore">
+        <div class="container">
+          <h2 class="section-title center scroll-reveal">
+            Исследуйте <span class="title-highlight">регион Яловы</span>
+          </h2>
+          <p class="section-subtitle center scroll-reveal">
+            Уникальные районы с собственной атмосферой и преимуществами
+          </p>
+
+          <div class="districts-grid">
+            <article class="district-card scroll-reveal" data-district="termal">
+              <div class="district-image">
+                <div class="district-placeholder thermal-gradient">
+                  <svg viewBox="0 0 200 200" class="district-icon">
+                    <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M100 40 Q100 80 100 100 M80 100 Q100 120 120 100" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="100" cy="70" r="8" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="district-content">
+                <h3>Термал</h3>
+                <p>Лечебные термальные источники с серой, натрием и кальцием. SPA-комплексы и оздоровительные центры.</p>
+                <div class="district-tags">
+                  <span class="tag">🧖 Термальные воды</span>
+                  <span class="tag">🏥 SPA-центры</span>
+                  <span class="tag">🌿 Экология</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="district-card scroll-reveal delay-1" data-district="altinova">
+              <div class="district-image">
+                <div class="district-placeholder bay-gradient">
+                  <svg viewBox="0 0 200 200" class="district-icon">
+                    <path d="M20 120 Q60 100 100 120 T180 120 L180 180 L20 180 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <line x1="100" y1="60" x2="100" y2="100" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="100" cy="50" r="10" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="district-content">
+                <h3>Алтынова</h3>
+                <p>Вид на залив, близость к мосту Османгази. Быстрая транспортная доступность в Стамбул и Измит.</p>
+                <div class="district-tags">
+                  <span class="tag">🌊 Вид на залив</span>
+                  <span class="tag">🌉 Мост Османгази</span>
+                  <span class="tag">🚗 Транспорт</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="district-card scroll-reveal delay-2" data-district="cinarcik">
+              <div class="district-image">
+                <div class="district-placeholder beach-gradient">
+                  <svg viewBox="0 0 200 200" class="district-icon">
+                    <path d="M40 140 Q80 120 120 140 T200 140" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="70" cy="100" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="130" cy="90" r="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <line x1="50" y1="160" x2="150" y2="160" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="district-content">
+                <h3>Чынарджык</h3>
+                <p>Песчаные пляжи и природные парки. Идеально для семейного отдыха и постоянного проживания.</p>
+                <div class="district-tags">
+                  <span class="tag">🏖️ Песчаные пляжи</span>
+                  <span class="tag">🌲 Природные парки</span>
+                  <span class="tag">👨‍👩‍👧‍👦 Семейный</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="district-card scroll-reveal delay-3" data-district="other">
+              <div class="district-image">
+                <div class="district-placeholder nature-gradient">
+                  <svg viewBox="0 0 200 200" class="district-icon">
+                    <path d="M100 40 L120 80 L160 80 L130 110 L140 150 L100 130 L60 150 L70 110 L40 80 L80 80 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="district-content">
+                <h3>Достопримечательности</h3>
+                <p>Сад Ататюрка, водопад Судушен, лесные массивы и исторические места региона.</p>
+                <div class="district-tags">
+                  <span class="tag">🌳 Сад Ататюрка</span>
+                  <span class="tag">💦 Водопад Судушен</span>
+                  <span class="tag">🏛️ История</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Блок 6: Footer / Контакты -->
+      <footer class="footer" id="contact">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-contact">
+              <h3>Свяжитесь с нами</h3>
+              <p>Поможем подобрать идеальную недвижимость в Ялове и сопроводим всю сделку</p>
+              
+              <div class="contact-methods">
+                <a href="https://wa.me/905000000000" class="contact-link whatsapp">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                  </svg>
+                  <span>WhatsApp</span>
+                </a>
+                <a href="tel:+905000000000" class="contact-link phone">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  <span>+90 500 000 00 00</span>
+                </a>
+                <a href="mailto:info@yalovahomes.com" class="contact-link email">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                  <span>info@yalovahomes.com</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="footer-map">
+              <h3>Как добраться</h3>
+              <p>Маршрут от парома Стамбул-Ялова до наших объектов</p>
+              <div class="map-placeholder">
+                <svg viewBox="0 0 400 300" class="map-svg">
+                  <defs>
+                    <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                    </linearGradient>
+                  </defs>
+                  <rect fill="url(#mapGrad)" width="400" height="300" rx="12"/>
+                  <path d="M50 250 Q100 200 150 220 T250 200 T350 180" fill="none" stroke="white" stroke-width="3" stroke-dasharray="5,5"/>
+                  <circle cx="50" cy="250" r="8" fill="#fff"/>
+                  <circle cx="350" cy="180" r="8" fill="#FFD700"/>
+                  <text x="50" y="275" fill="white" font-size="12" text-anchor="middle">Паром</text>
+                  <text x="350" y="205" fill="white" font-size="12" text-anchor="middle">Объекты</text>
+                  <text x="200" y="150" fill="white" font-size="14" text-anchor="middle" font-weight="600">~1 час пути</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>&copy; 2026 Yalova Homes. Все права защищены.</p>
+            <div class="footer-links">
+              <a href="#">Политика конфиденциальности</a>
+              <a href="#">Условия использования</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
 
     <script src="script.js"></script>
   </body>
