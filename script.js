@@ -1,311 +1,403 @@
-const STORAGE_KEY = "roadmap-v1";
-const TOTAL_BUDGET = 200000;
+/**
+ * YALOVA HOMES - Modern Real Estate Website
+ * Interactive JavaScript for animations and user experience
+ */
 
-const goals = [
-  {
-    id: 1,
-    title: "Ремонт в домике для квартирантов",
-    deadline: "30.03.2026",
-    budget: 20000,
-    tasks: [
-      "покрасить кухню, прихожку, потолок в спальне",
-      "переклеить наличники в ванной",
-      "починить комод",
-      "обшить диван и кресла",
-      "собрать кровать и купить матрас",
-      "купить холодильник",
-      "починить стиралку"
-    ]
-  },
-  {
-    id: 2,
-    title: "Сделать фасад нового дома",
-    deadline: "30.04.2026",
-    budget: 10000,
-    tasks: ["слой клея выровнять стены", "грунтовка всех стен", "фактурная краска всех стен"]
-  },
-  {
-    id: 3,
-    title: "Покрасить все дома / освежить фасады",
-    deadline: "15.05.2026",
-    budget: 5000,
-    tasks: [
-      "сделать короб под газовую трубу",
-      "доклеить углы после тротуарной плитки",
-      "покрасить все дома одним слоем фасадной краски"
-    ]
-  },
-  {
-    id: 4,
-    title: "Перенести туалет в угол двора",
-    deadline: "30.05.2026",
-    budget: 15000,
-    tasks: ["снести старый туалет", "построить новый туалет", "проложить тропинку к нему"]
-  },
-  {
-    id: 5,
-    title: "Доложить двор тротуарной плиткой",
-    deadline: "30.06.2026",
-    budget: 0,
-    tasks: [
-      "облицевать колодец",
-      "доделать заезд в воротах",
-      "доложить плитку",
-      "сделать тропинку вместо туалета",
-      "перетащить землю жёлтую из огорода"
-    ]
-  },
-  {
-    id: 6,
-    title: "Накопить 300 000 ₽",
-    deadline: "Финальная цель",
-    budget: 0,
-    tasks: ["Откладывать по 50к в месяц"]
-  },
-  {
-    id: 7,
-    title: "Починить Октавию",
-    deadline: "30.04.2026",
-    budget: 50000,
-    tasks: [
-      "заменить масла и фильтры (ТО)",
-      "заменить топливный фильтр",
-      "полирнуть кузов и фары",
-      "сделать химчистку салона",
-      "починить кондер",
-      "поменять верхний опорный подшипник"
-    ]
-  },
-  {
-    id: 8,
-    title: "Купить кондиционер в дом",
-    deadline: "30.03.2026",
-    budget: 40000,
-    tasks: ["Выбрать модель", "Вызвать мастера"]
-  }
-];
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize all modules
+  initScrollReveal();
+  initNavbarScroll();
+  initMobileMenu();
+  initTiltEffect();
+  initSmoothScroll();
+  initPropertyCards();
+  initHeroParticles();
+});
 
-const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-const goalsLayer = document.getElementById("goalsLayer");
-const connections = document.querySelector(".connections");
-const coreCard = document.getElementById("coreCard");
-const detailsPanel = document.getElementById("detailsPanel");
-const panelTitle = document.getElementById("panelTitle");
-const tasksList = document.getElementById("tasksList");
-const moodboardModal = document.getElementById("moodboardModal");
-const modalTitle = document.getElementById("modalTitle");
-
-const radialLayout = [
-  { angle: -85, radius: 340 },
-  { angle: -35, radius: 365 },
-  { angle: 18, radius: 345 },
-  { angle: 60, radius: 355 },
-  { angle: 110, radius: 335 },
-  { angle: 155, radius: 370 },
-  { angle: 210, radius: 360 },
-  { angle: 255, radius: 345 }
-];
-
-function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
-function getGoalState(goalId) {
-  state[goalId] ??= { deadline: null, budget: null, doneTasks: {} };
-  return state[goalId];
-}
-
-function formatBudget(num) {
-  return `${Number(num || 0).toLocaleString("ru-RU")} ₽`;
-}
-
-function parseDate(dateStr) {
-  if (!dateStr.includes(".")) return null;
-  const [d, m, y] = dateStr.split(".").map(Number);
-  return new Date(y, m - 1, d);
-}
-
-function setTimeProgress() {
-  const start = new Date();
-  start.setMonth(start.getMonth() - 6);
-  const end = new Date(2026, 5, 30);
-  const now = new Date();
-  const total = end - start;
-  const elapsed = Math.min(Math.max(now - start, 0), total);
-  const pct = Math.round((elapsed / total) * 100);
-  const el = document.getElementById("timeProgress");
-  el.style.setProperty("--progress", `${pct}%`);
-  el.dataset.label = `${pct}%`;
-}
-
-function buildBudgetChart() {
-  const chart = document.getElementById("budgetChart");
-  let acc = 0;
-  const gradients = goals
-    .filter((g) => g.budget > 0)
-    .map((g, idx) => {
-      const hue = (idx * 45 + 210) % 360;
-      const part = (g.budget / TOTAL_BUDGET) * 100;
-      const from = acc;
-      acc += part;
-      return `hsl(${hue} 75% 60%) ${from}% ${acc}%`;
+/**
+ * Scroll Reveal Animation
+ * Elements fade in as they enter viewport
+ */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.scroll-reveal, .fade-in-up');
+  
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Unobserve after revealing to avoid re-animation
+        revealObserver.unobserve(entry.target);
+      }
     });
-  gradients.push(`#e5e7eb ${acc}% 100%`);
-  chart.style.background = `conic-gradient(${gradients.join(",")})`;
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+  
+  revealElements.forEach(el => revealObserver.observe(el));
 }
 
-function renderGoals() {
-  goalsLayer.innerHTML = "";
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-
-  goals.forEach((goal, i) => {
-    const local = getGoalState(goal.id);
-    const deadline = local.deadline || goal.deadline;
-    const budget = local.budget ?? goal.budget;
-    const card = document.createElement("article");
-    card.className = "goal-card";
-    card.dataset.goalId = String(goal.id);
-
-    const costPct = Math.min((Number(budget) / TOTAL_BUDGET) * 100, 100);
-
-    card.innerHTML = `
-      <div class="goal-top">
-        <h4 class="goal-title">${goal.title}</h4>
-        <button class="mood-trigger" title="Открыть мудборд">📷</button>
-      </div>
-      <div class="meta">
-        <div>📅 <span class="editable" data-field="deadline">${deadline}</span></div>
-        <div>₽ <span class="editable" data-field="budget">${formatBudget(budget)}</span></div>
-      </div>
-      <div class="cost-bar"><div class="cost-fill" style="width:${costPct}%"></div></div>
-    `;
-
-    if (window.innerWidth > 900) {
-      const { angle, radius } = radialLayout[i];
-      const x = centerX + radius * Math.cos((angle * Math.PI) / 180) - 110;
-      const y = centerY + radius * Math.sin((angle * Math.PI) / 180) - 70;
-      card.style.left = `${x}px`;
-      card.style.top = `${y}px`;
+/**
+ * Navbar scroll effect
+ * Adds shadow on scroll
+ */
+function initNavbarScroll() {
+  const navbar = document.querySelector('.navbar');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
     }
-
-    wireInteractions(card, goal);
-    goalsLayer.appendChild(card);
   });
-
-  drawConnections();
 }
 
-function wireInteractions(card, goal) {
-  card.addEventListener("click", (e) => {
-    if (e.target.closest(".editable") || e.target.closest("input") || e.target.closest(".mood-trigger")) return;
-    openDetails(goal);
+/**
+ * Mobile menu toggle
+ */
+function initMobileMenu() {
+  const mobileBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (!mobileBtn || !navLinks) return;
+  
+  mobileBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileBtn.classList.toggle('open');
   });
+  
+  // Close menu when clicking a link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      mobileBtn.classList.remove('open');
+    });
+  });
+}
 
-  card.addEventListener("dblclick", () => openMoodboard(goal));
+/**
+ * 3D Tilt Effect for Property Cards
+ */
+function initTiltEffect() {
+  const tiltCards = document.querySelectorAll('[data-tilt]');
+  
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 10;
+      const rotateY = (centerX - x) / 10;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+}
 
-  card.querySelector(".mood-trigger").addEventListener("click", () => openMoodboard(goal));
+/**
+ * Smooth scroll for anchor links
+ */
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      
+      e.preventDefault();
+      const target = document.querySelector(href);
+      
+      if (target) {
+        const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+}
 
-  card.querySelectorAll(".editable").forEach((editable) => {
-    editable.addEventListener("click", (e) => {
+/**
+ * Property cards interaction
+ */
+function initPropertyCards() {
+  const propertyButtons = document.querySelectorAll('.property-card .btn-secondary');
+  
+  propertyButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const field = editable.dataset.field;
-      const current = editable.textContent.replace("₽", "").replaceAll(" ", "").trim();
-      editable.innerHTML = `<input value="${current}" />`;
-      const input = editable.querySelector("input");
-      input.focus();
-      input.addEventListener("blur", () => {
-        const local = getGoalState(goal.id);
-        if (field === "budget") {
-          local.budget = Number(input.value.replace(/\D/g, "")) || 0;
-          editable.textContent = formatBudget(local.budget);
-        } else {
-          local.deadline = input.value || goal.deadline;
-          editable.textContent = local.deadline;
+      const card = btn.closest('.property-card');
+      const title = card.querySelector('.card-title')?.textContent || 'Недвижимость';
+      const price = card.querySelector('.card-price')?.textContent || '';
+      
+      // Create simple modal or redirect to contact form
+      showInquiryModal(title, price);
+    });
+  });
+}
+
+/**
+ * Show inquiry modal
+ */
+function showInquiryModal(title, price) {
+  // Check if modal already exists
+  let modal = document.querySelector('.inquiry-modal');
+  
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.className = 'inquiry-modal';
+    modal.innerHTML = `
+      <div class="inquiry-modal-content">
+        <button class="inquiry-modal-close">&times;</button>
+        <h3>Заинтересовала эта недвижимость?</h3>
+        <p class="inquiry-property-title"></p>
+        <p class="inquiry-property-price"></p>
+        <form class="inquiry-form">
+          <input type="text" placeholder="Ваше имя" required />
+          <input type="tel" placeholder="Телефон" required />
+          <input type="email" placeholder="Email" />
+          <textarea placeholder="Сообщение" rows="4"></textarea>
+          <button type="submit" class="btn btn-primary">Отправить заявку</button>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // Add modal styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .inquiry-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        place-items: center;
+        z-index: 2000;
+        padding: 1rem;
+      }
+      .inquiry-modal.active {
+        display: grid;
+      }
+      .inquiry-modal-content {
+        background: white;
+        border-radius: 24px;
+        padding: 2rem;
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        animation: modalSlideIn 0.3s ease;
+      }
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
         }
-        saveState();
-        buildBudgetChart();
-        renderGoals();
-      });
-      input.addEventListener("keydown", (ev) => {
-        if (ev.key === "Enter") input.blur();
-      });
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .inquiry-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #6B7280;
+        line-height: 1;
+      }
+      .inquiry-property-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #006D77;
+        margin: 1rem 0 0.5rem;
+      }
+      .inquiry-property-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #D4A373;
+        margin-bottom: 1.5rem;
+      }
+      .inquiry-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .inquiry-form input,
+      .inquiry-form textarea {
+        padding: 1rem;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+      }
+      .inquiry-form input:focus,
+      .inquiry-form textarea:focus {
+        outline: none;
+        border-color: #2E86AB;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Close button functionality
+    modal.querySelector('.inquiry-modal-close').addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+    
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+    
+    // Form submission
+    modal.querySelector('.inquiry-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+      modal.classList.remove('active');
+    });
+  }
+  
+  // Update modal content
+  modal.querySelector('.inquiry-property-title').textContent = title;
+  modal.querySelector('.inquiry-property-price').textContent = price;
+  
+  // Show modal
+  modal.classList.add('active');
+}
+
+/**
+ * Hero particles animation
+ */
+function initHeroParticles() {
+  const particlesContainer = document.getElementById('heroParticles');
+  if (!particlesContainer) return;
+  
+  // Create floating particles
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+      position: absolute;
+      width: ${Math.random() * 6 + 2}px;
+      height: ${Math.random() * 6 + 2}px;
+      background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3});
+      border-radius: 50%;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      animation: floatParticle ${Math.random() * 10 + 10}s linear infinite;
+      animation-delay: ${Math.random() * 5}s;
+      pointer-events: none;
+    `;
+    particlesContainer.appendChild(particle);
+  }
+  
+  // Add particle animation keyframes
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes floatParticle {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+/**
+ * Lazy loading images
+ */
+if ('IntersectionObserver' in window) {
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src || img.src;
+        img.classList.add('loaded');
+        imageObserver.unobserve(img);
+      }
     });
   });
-}
-
-function drawConnections() {
-  if (window.innerWidth <= 900) {
-    connections.innerHTML = "";
-    return;
-  }
-
-  const coreRect = coreCard.getBoundingClientRect();
-  const sx = coreRect.left + coreRect.width / 2;
-  const sy = coreRect.top + coreRect.height / 2;
-  connections.setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`);
-
-  let svg = "";
-  document.querySelectorAll(".goal-card").forEach((card) => {
-    const r = card.getBoundingClientRect();
-    const tx = r.left + r.width / 2;
-    const ty = r.top + r.height / 2;
-    svg += `<line x1="${sx}" y1="${sy}" x2="${tx}" y2="${ty}" stroke="rgba(99,102,241,.7)" stroke-width="1.3"/>`;
-  });
-  connections.innerHTML = svg;
-}
-
-function openDetails(goal) {
-  detailsPanel.classList.add("open");
-  panelTitle.textContent = goal.title;
-
-  const local = getGoalState(goal.id);
-  tasksList.innerHTML = "";
-
-  if (!goal.tasks.length) {
-    tasksList.innerHTML = "<li>Задачи пока не добавлены</li>";
-    return;
-  }
-
-  goal.tasks.forEach((task, idx) => {
-    const key = `task-${idx}`;
-    const done = !!local.doneTasks[key];
-    const li = document.createElement("li");
-    li.className = `task-item ${done ? "done" : ""}`;
-    li.innerHTML = `<button class="check" aria-label="Отметить задачу"></button><span>${task}</span>`;
-    li.querySelector(".check").addEventListener("click", () => {
-      local.doneTasks[key] = !local.doneTasks[key];
-      saveState();
-      li.classList.toggle("done");
-    });
-    tasksList.appendChild(li);
+  
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    imageObserver.observe(img);
   });
 }
 
-function openMoodboard(goal) {
-  modalTitle.textContent = `Мудборд: ${goal.title}`;
-  moodboardModal.classList.add("open");
-  moodboardModal.setAttribute("aria-hidden", "false");
+/**
+ * Parallax effect on scroll
+ */
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const parallaxElements = document.querySelectorAll('.hero-bg, .hero-particles');
+  
+  parallaxElements.forEach(el => {
+    const speed = 0.5;
+    el.style.transform = `translateY(${scrolled * speed}px)`;
+  });
+}, { passive: true });
+
+/**
+ * Counter animation for stats
+ */
+function animateCounter(element, target, duration = 2000) {
+  const start = 0;
+  const increment = target / (duration / 16);
+  let current = start;
+  
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    element.textContent = Math.floor(current).toLocaleString('ru-RU');
+  }, 16);
 }
 
-document.getElementById("closePanel").addEventListener("click", () => {
-  detailsPanel.classList.remove("open");
-});
+// Animate stats when visible
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const statValues = entry.target.querySelectorAll('.stat-value');
+      statValues.forEach(stat => {
+        const text = stat.textContent;
+        const number = parseFloat(text.replace(/[^0-9.]/g, ''));
+        if (!isNaN(number)) {
+          animateCounter(stat, number);
+        }
+      });
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
 
-document.getElementById("closeModal").addEventListener("click", () => {
-  moodboardModal.classList.remove("open");
-  moodboardModal.setAttribute("aria-hidden", "true");
-});
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) {
+  statsObserver.observe(heroStats);
+}
 
-moodboardModal.addEventListener("click", (e) => {
-  if (e.target === moodboardModal) {
-    moodboardModal.classList.remove("open");
-    moodboardModal.setAttribute("aria-hidden", "true");
-  }
-});
-
-window.addEventListener("resize", renderGoals);
-
-setTimeProgress();
-buildBudgetChart();
-renderGoals();
+console.log('🏠 Yalova Homes website initialized successfully!');
