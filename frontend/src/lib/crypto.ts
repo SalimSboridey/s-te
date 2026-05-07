@@ -1,0 +1,5 @@
+const enc=new TextEncoder(), dec=new TextDecoder();
+const b64=(buf:ArrayBuffer)=>btoa(String.fromCharCode(...new Uint8Array(buf)));const fromB64=(s:string)=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function key(pass:string,salt:Uint8Array){const base=await crypto.subtle.importKey('raw',enc.encode(pass),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+export async function encryptSecret(pass:string,payload:any){const salt=crypto.getRandomValues(new Uint8Array(16));const iv=crypto.getRandomValues(new Uint8Array(12));const k=await key(pass,salt);const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,enc.encode(JSON.stringify(payload)));return {v:1,alg:'AES-GCM',kdf:'PBKDF2-SHA256',salt:b64(salt),iv:b64(iv),ciphertext:b64(ct)}}
+export async function decryptSecret(pass:string,blob:any){const k=await key(pass,fromB64(blob.salt));const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:fromB64(blob.iv)},k,fromB64(blob.ciphertext));return JSON.parse(dec.decode(pt))}
